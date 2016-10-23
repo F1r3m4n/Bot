@@ -19,10 +19,26 @@ var connector = new builder.ChatConnector({
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
+var model = process.env.MODEL;
+var recognizer = new builder.LuisRecognizer(model);
+var intent = new builder.IntentDialog({ recognizers: [recognizer] });
+
+
 //=========================================================
 // Bots Dialogs
 //=========================================================
 
-bot.dialog('/', function (session) {
-    session.send("Hello World");
-});
+//bot.dialog('/', function (session) {
+//    session.send("Hello World");
+//});
+
+bot.dialog('/', intent);
+
+intent.matches('Profanity', [
+    function (session, args, next) {
+        // session.sendTyping();
+        session.send("That's a little inappropriate...");
+            session.endDialog();
+    }
+]);
+
