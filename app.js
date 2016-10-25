@@ -252,7 +252,7 @@ intent2.matches('GiveRecommendation', [
     },
     function (session, results, next) {
         if (results.response){
-           session.send("Great, I'll go ahead and make the switch for you");
+           session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
            session.endDialog();
         }
         else{
@@ -272,7 +272,7 @@ intent4.matches('GiveRecommendation', [
     },
     function (session, results, next) {
         if (results.response){
-           session.send("Great, I'll go ahead and make the switch for you");
+           session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
            session.endDialog();
         }
         else{
@@ -301,7 +301,7 @@ intent2.matches('SpecifyData', [
     },
     function (session, results, next) {
             if (results.response){
-               session.send("Great, I'll go ahead and make the switch for you");
+               session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
                session.endDialog();
             }
             else{
@@ -325,7 +325,6 @@ intent.matches('Profanity', [
 intent.matches('NotInScope', [
     function (session, args, next) {
         session.send("Unfortunately I can only help with Bundle Upgrades and Recommendations. Is there something relevant I can help you with?");
-	    session.endDialog();
     }
 ]);
 
@@ -352,6 +351,19 @@ intent2.matches('Profanity', [
             session.send("I don't endorse this kind of behaviour");
     }
 ]);
+
+intent1.matches('EndConversation', [
+    function (session, args, next) {
+            session.endConversation("Ok… Goodbye.");
+    }
+]);
+
+intent2.matches('EndConversation', [
+    function (session, args, next) {
+            session.endConversation("Ok… Goodbye.");
+    }
+]);
+
 
 
 intent.onDefault(builder.DialogAction.send("I'm sorry I didn't understand. Could you please rephrase that."));
