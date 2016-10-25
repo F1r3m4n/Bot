@@ -248,7 +248,15 @@ intent2.matches('MoreData', [
 
 intent2.matches('GiveRecommendation', [
     function (session, args, next) {
+            session.send('Here is what I have')
+            var msg = new builder.Message(session)
+                        .attachments([{
+                            contentType: "image/jpeg",
+                            contentUrl: "http://www.theoldrobots.com/images62/Bender-18.JPG"
+                        }]);
+            session.send(msg);
             builder.Prompts.confirm(session,"Based on your recent usage I can recommend that you move to a bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle. This bundle comes with the new iPhone 7 starting from £45 monthly with an upfront cost of £50 Does this interest you?");
+
     },
     function (session, results, next) {
         if (results.response){
