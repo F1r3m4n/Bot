@@ -248,14 +248,15 @@ intent2.matches('MoreData', [
 
 intent2.matches('GiveRecommendation', [
     function (session, args, next) {
-            session.send('Here is what I have')
+            session.send('Ok! Based on your recent usage I can recommend that you move to a bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle.')
+            session.send('This bundle comes with the new iPhone 7 starting from £45 monthly with an upfront cost of £50');
             var msg = new builder.Message(session)
                         .attachments([{
                             contentType: "image/jpeg",
-                            contentUrl: "http://www.theoldrobots.com/images62/Bender-18.JPG"
+                            contentUrl: "http://store.storeimages.cdn-apple.com/4973/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/gallery6/iphone7-gallery6-2016?wid=1670&hei=1282&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1473278890397"
                         }]);
             session.send(msg);
-            builder.Prompts.confirm(session,"Based on your recent usage I can recommend that you move to a bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle. This bundle comes with the new iPhone 7 starting from £45 monthly with an upfront cost of £50 Does this interest you?");
+            builder.Prompts.confirm(session,"Does this interest you?");
 
     },
     function (session, results, next) {
