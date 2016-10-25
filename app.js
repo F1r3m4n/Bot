@@ -64,13 +64,13 @@ bot.dialog('/profile_name', [
             builder.Prompts.text(session, "Enter the first name you used to open your account: Eg 'John' ")
         }
         else if (session.userData.usageQuery) {
-            builder.Prompts.text(session, "Hi there, before I can look at your usage I need to get your personal details. Can you please give me your first name as it's registered with Vodafone?")
+            builder.Prompts.text(session, "Hi there, before I can look at your usage I need to get your personal details. Can you please give me your first name as it's registered with VF?")
         }
         else if (session.userData.upgradeQuery) {
-            builder.Prompts.text(session, "Hi there, before I can look at your contract details I need to get your personal details. Can you please give me your first name as it's registered with Vodafone?")
+            builder.Prompts.text(session, "Hi there, before I can look at your contract details I need to get your personal details. Can you please give me your first name as it's registered with VF?")
         }
          else {
-            builder.Prompts.text(session, "Hi, I am Winston, Vodafone's trial Chatbot. Before we continue, could you please give me your first name as it's registered with Vodafone?");
+            builder.Prompts.text(session, "Hi, I am Winston, VF's trial Chatbot. Before we continue, could you please give me your first name as it's registered with VF?");
         }
     },
     function (session, results, next) {
@@ -94,7 +94,7 @@ bot.dialog('/profile_phone', [
             if (args && args.reprompt) {
                 builder.Prompts.text(session, "Enter the number using a format of either: '0741234567' or '074 1234567', '(01234) 123-4567'")
             } else {
-                builder.Prompts.text(session, "Thanks "+ session.userData.name + ", Can you also provide me with your current Vodafone number?");
+                builder.Prompts.text(session, "Thanks "+ session.userData.name + ", Can you also provide me with your current VF number?");
             }
         },
     function (session, results) {
