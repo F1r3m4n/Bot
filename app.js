@@ -358,7 +358,8 @@ intent.matches('EndConversation', [
             session.userData.phone = null
             session.userData.upgradeQuery = null
             session.userData.usageQuery = null
-            session.endConversation("Ok… Goodbye.");
+            session.send("Ok… Goodbye.")
+            session.endConversation();
     }
 ]);
 
@@ -368,7 +369,8 @@ intent2.matches('EndConversation', [
             session.userData.phone = null
             session.userData.upgradeQuery = null
             session.userData.usageQuery = null
-            session.endConversation("Ok… Goodbye.");
+            session.send("Ok… Goodbye.")
+            session.endConversation();
     }
 ]);
 
