@@ -360,17 +360,3 @@ intent3.onDefault(builder.DialogAction.send("I'm sorry I didn't understand. Coul
 intent4.onDefault(builder.DialogAction.send("I'm sorry I didn't understand. Could you please rephrase that."));
 
 
-intent.matches('Profanity', [
-    function (session) {
-        session.send("That's a little inappropriate...");
-    }
-]);
-
-intent.matches('Greeting', [
-    function (session) {
-        session.send("Hi there!");
-    }
-]);
-
-intent.onDefault(builder.DialogAction.send("I'm sorry I didn't understand. Could you please rephrase that."));
-
