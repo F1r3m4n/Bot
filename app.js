@@ -354,12 +354,16 @@ intent2.matches('Profanity', [
 
 intent.matches('EndConversation', [
     function (session, args, next) {
+            session.userData.name = null
+            session.userData.phone = null
             session.endConversation("Ok… Goodbye.");
     }
 ]);
 
 intent2.matches('EndConversation', [
     function (session, args, next) {
+            session.userData.name = null
+            session.userData.phone = null
             session.endConversation("Ok… Goodbye.");
     }
 ]);
