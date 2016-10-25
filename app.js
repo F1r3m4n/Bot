@@ -352,7 +352,7 @@ intent2.matches('Profanity', [
     }
 ]);
 
-intent1.matches('EndConversation', [
+intent.matches('EndConversation', [
     function (session, args, next) {
             session.endConversation("Ok… Goodbye.");
     }
