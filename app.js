@@ -115,13 +115,13 @@ bot.dialog('/profile_phone', [
 		}
 		else{
 		    session.userData.bundle_size = 10;
-                    session.userData.bundle_cost = 45;
-                    session.userData.usage_tot = 6;
-                    session.userData.usage_oob = 0;
-                    session.userData.last_bill = 45;
-                    session.userData.tt_contract_end = 2;
-                    session.userData.tt_upgrade = 0;
-                    session.userData.lifetime = 'eoc';
+            session.userData.bundle_cost = 45;
+            session.userData.usage_tot = 6;
+            session.userData.usage_oob = 0;
+            session.userData.last_bill = 45;
+            session.userData.tt_contract_end = 2;
+            session.userData.tt_upgrade = 0;
+            session.userData.lifetime = 'eoc';
 		}
                 session.endDialog();
             } else {
@@ -263,6 +263,8 @@ intent2.matches('GiveRecommendation', [
     function (session, results, next) {
         if (results.response){
            session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+           session.userData.data = 10;
+           session.userData.switched = 1;
            session.endDialog();
         }
         else{
@@ -283,6 +285,8 @@ intent4.matches('GiveRecommendation', [
     function (session, results, next) {
         if (results.response){
            session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+           session.userData.data = 4;
+           session.userData.switched = 1;
            session.endDialog();
         }
         else{
@@ -385,24 +389,54 @@ intent2.matches('Profanity', [
 
 intent.matches('EndConversation', [
     function (session, args, next) {
+            if(session.userData.switched == 1){
+                client.messages.create({
+                           to: session.userData.phone,
+                           from: '+441233800666',
+                           body: 'Thanks ' + session.userData.name + '! I hope you enjoy your ' + session.userData.data + ' GB of data every month!'
+                       }, function (err, message) {
+                           console.log(message.sid);
+                       });
+            }
+            else if(session.userData.data != null){
+                 client.messages.create({
+                           to: session.userData.phone,
+                           from: '+441233800666',
+                           body: 'Thanks ' + session.userData.name + '! Feel free to get back in touch if you decide you want ' + session.userData.data + ' GB of data every month!'
+                       }, function (err, message) {
+                           console.log(message.sid);
+                       });
+            }
             session.userData.name = null
             session.userData.phone = null
             session.userData.upgradeQuery = null
             session.userData.usageQuery = null
             session.send("Ok… Goodbye.")
-            client.messages.create({
-                   to: '+447584408829',
-                   from: '+441233800666',
-                   body: 'Bye Bye',
-               }, function (err, message) {
-                   console.log(message.sid);
-               });
+
             session.endConversation();
     }
 ]);
 
 intent2.matches('EndConversation', [
     function (session, args, next) {
+            if(session.userData.switched == 1){
+                client.messages.create({
+                           to: session.userData.phone,
+                           from: '+441233800666',
+                           body: 'Thanks ' + session.userData.name + '! I hope you enjoy your ' + session.userData.data + ' GB of data every month!'
+                       }, function (err, message) {
+                           console.log(message.sid);
+                       });
+            }
+            else if(session.userData.data != null){
+                 client.messages.create({
+                           to: session.userData.phone,
+                           from: '+441233800666',
+                           body: 'Thanks ' + session.userData.name + '! Feel free to get back in touch if you decide you want ' + session.userData.data + ' GB of data every month!'
+                       }, function (err, message) {
+                           console.log(message.sid);
+                       });
+            }
             session.userData.name = null
             session.userData.phone = null
             session.userData.upgradeQuery = null
