@@ -1,5 +1,6 @@
 var restify = require('restify');
 var builder = require('botbuilder');
+var client = require('twilio')(process.env.accountSid, process.env.authToken);
 
 //=========================================================
 // Bot Setup
@@ -389,6 +390,13 @@ intent.matches('EndConversation', [
             session.userData.upgradeQuery = null
             session.userData.usageQuery = null
             session.send("Ok… Goodbye.")
+            client.messages.create({
+                   to: '+447584408829',
+                   from: '+441233800666',
+                   body: 'Bye Bye',
+               }, function (err, message) {
+                   console.log(message.sid);
+               });
             session.endConversation();
     }
 ]);

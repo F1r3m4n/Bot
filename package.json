@@ -21,6 +21,7 @@
   "homepage": "https://github.com/F1r3m4n/Bot#readme",
   "dependencies": {
     "botbuilder": "^3.3.3",
-    "restify": "^4.1.1"
+    "restify": "^4.1.1",
+    "twilio": "^2.11.0"
   }
 }
