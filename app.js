@@ -249,8 +249,7 @@ intent2.matches('MoreData', [
 
 intent2.matches('GiveRecommendation', [
     function (session, args, next) {
-            session.send('Ok! Based on your recent usage I can recommend that you move to the Red Value Bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle.')
-            session.send('This bundle comes with the new iPhone 7 starting from £53 monthly with an upfront cost of £130');
+            session.send('Ok! Based on your recent usage I have the following recommendations for you. This will allow you stream content freely without worrying about going out of bundle.');
             //var msg = new builder.Message(session)
             //            .attachments([{
             //                contentType: "image/jpeg",
@@ -262,40 +261,27 @@ intent2.matches('GiveRecommendation', [
                 .attachmentLayout(builder.AttachmentLayout.carousel)
                 .attachments([
                     new builder.HeroCard(session)
-                        .title("Space Needle")
-                        .subtitle("The Space Needle is an observation tower in Seattle, Washington, a landmark of the Pacific Northwest, and an icon of Seattle.")
+                        .title("iPhone 7 with a 10 GB Red Value Bundle")
+                        .subtitle("The new iPhone 7 starting from £53 monthly with an upfront cost of £130")
                         .images([
-                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
-                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/800px-Seattlenighttimequeenanne.jpg")),
+                            builder.CardImage.create(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_jet_bla.jpg")
+                                .tap(builder.CardAction.showImage(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_jet_bla.jpg")),
                         ])
                         .buttons([
-                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Space_Needle", "Wikipedia"),
                             builder.CardAction.imBack(session, "select:100", "Select")
                         ]),
                     new builder.HeroCard(session)
-                        .title("Pikes Place Market")
-                        .subtitle("Pike Place Market is a public market overlooking the Elliott Bay waterfront in Seattle, Washington, United States.")
+                        .title("iPhone 7 with a 10 GB Red Value Bundle")
+                        .subtitle("The new iPhone 7 Plus starting from £58 monthly with an upfront cost of £220")
                         .images([
-                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/320px-PikePlaceMarket.jpg")
-                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/800px-PikePlaceMarket.jpg")),
+                            builder.CardImage.create(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_plus_si.jpg")
+                                .tap(builder.CardAction.showImage(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_plus_si.jpg")),
                         ])
                         .buttons([
-                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Pike_Place_Market", "Wikipedia"),
                             builder.CardAction.imBack(session, "select:101", "Select")
-                        ]),
-                    new builder.HeroCard(session)
-                        .title("EMP Museum")
-                        .subtitle("EMP Musem is a leading-edge nonprofit museum, dedicated to the ideas and risk-taking that fuel contemporary popular culture.")
-                        .images([
-                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
-                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
-                        ])
-                        .buttons([
-                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/EMP_Museum", "Wikipedia"),
-                            builder.CardAction.imBack(session, "select:102", "Select")
                         ])
                 ]);
-            builder.Prompts.choice(session, msg, "select:100|select:101|select:102");
+            builder.Prompts.choice(session, msg, "select:100|select:101");
 
             //builder.Prompts.confirm(session,"Does this interest you?");
 
@@ -310,16 +296,17 @@ intent2.matches('GiveRecommendation', [
             }
             switch (kvPair[1]) {
                 case '100':
-                    item = "the Space Needle";
+                    item = "the iPhone 7 with Red Value Bundle";
                     break;
                 case '101':
-                    item = "Pikes Place Market";
-                    break;
-                case '102':
-                    item = "the EMP Museum";
+                    item = "the iPhone 7 Plus with Red Value Bundle";
                     break;
             }
             session.endDialog('You %s "%s"', action, item);
+            session.send("I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+            session.userData.data = 10;
+            session.userData.switched = 1;
+            session.endDialog();
         }
  ]);
 
