@@ -268,7 +268,7 @@ intent2.matches('GiveRecommendation', [
                                 .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/jetblack/iphone7-jetblack-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430076339")),
                         ])
                         .buttons([
-                            builder.CardAction.imBack(session, "select:100", "Select Red Value Bundle with iPhone 7"),
+                            builder.CardAction.imBack(session, "select:100", "Select this"),
                             builder.CardAction.imBack(session, "neither:neither", "Neither of these")
                         ]),
                     new builder.HeroCard(session)
@@ -279,7 +279,7 @@ intent2.matches('GiveRecommendation', [
                                 .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/plus/iphone7-plus-silver-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430122140")),
                         ])
                         .buttons([
-                            builder.CardAction.imBack(session, "select:101", "Select Red Value Bundle with iPhone 7 Plus"),
+                            builder.CardAction.imBack(session, "select:101", "Select this"),
                             builder.CardAction.imBack(session, "neither:neither", "Neither of these")
                         ])
                 ]);
@@ -384,7 +384,7 @@ intent2.matches('SpecifyData', [
     function (session, args, next) {
 	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
 	    session.userData.data = data.entity
-	    builder.Prompts.confirm(session,"The Red XXL bundle has " +  session.userData.data + " GB, unlimited minutes and texts. Prices depend on the device but they start from £45 monthly. Does this interest you?")
+	    builder.Prompts.confirm(session,"The Red Red Value Bundle has " +  session.userData.data + " GB, unlimited minutes and texts. Prices depend on the device but they start from £68 monthly. Does this interest you?")
     },
     function (session, results, next) {
             if (results.response){
