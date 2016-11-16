@@ -264,8 +264,8 @@ intent2.matches('GiveRecommendation', [
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
                         .subtitle("The new iPhone 7 starting from £53 monthly with an upfront cost of £130")
                         .images([
-                            builder.CardImage.create(session, "https://staticshop.o2.co.uk/product/images/iphone-7-matt-black_sku-header.png?cb=1e574806d7bfb2bd10c5c208a59bf3c3")
-                                .tap(builder.CardAction.showImage(session, "https://staticshop.o2.co.uk/product/images/iphone-7-matt-black_sku-header.png?cb=1e574806d7bfb2bd10c5c208a59bf3c3")),
+                            builder.CardImage.create(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/jetblack/iphone7-jetblack-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430076339")
+                                .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/jetblack/iphone7-jetblack-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430076339")),
                         ])
                         .buttons([
                             builder.CardAction.imBack(session, "select:100", "Select")
@@ -274,8 +274,8 @@ intent2.matches('GiveRecommendation', [
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
                         .subtitle("The new iPhone 7 Plus starting from £58 monthly with an upfront cost of £220")
                         .images([
-                            builder.CardImage.create(session, "https://staticshop.o2.co.uk/product/images/iphone-7-plus-gold_sku-header.png?cb=c96204056f53574d587b41c76d63a034")
-                                .tap(builder.CardAction.showImage(session, "https://staticshop.o2.co.uk/product/images/iphone-7-plus-gold_sku-header.png?cb=c96204056f53574d587b41c76d63a034")),
+                            builder.CardImage.create(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/plus/iphone7-plus-silver-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430122140")
+                                .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/plus/iphone7-plus-silver-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430122140")),
                         ])
                         .buttons([
                             builder.CardAction.imBack(session, "select:101", "Select")
