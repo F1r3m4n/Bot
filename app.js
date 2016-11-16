@@ -249,7 +249,7 @@ intent2.matches('MoreData', [
 
 intent2.matches('GiveRecommendation', [
     function (session, args, next) {
-            session.send('Ok! Based on your recent usage I have the following recommendations for you. This will allow you stream content freely without worrying about going out of bundle.');
+            session.send('Ok! Based on your recent usage I have the following recommendations for you. Both include a free annual subscription to Spotify that will allow you stream music without worrying about going out of bundle.');
             //var msg = new builder.Message(session)
             //            .attachments([{
             //                contentType: "image/jpeg",
@@ -262,23 +262,25 @@ intent2.matches('GiveRecommendation', [
                 .attachments([
                     new builder.HeroCard(session)
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
-                        .subtitle("The new iPhone 7 starting from £53 monthly with an upfront cost of £130")
+                        .subtitle("The new iPhone 7 starting from £53 monthly with an upfront cost of £130. Includes Spotify subscription for 12 months.")
                         .images([
                             builder.CardImage.create(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/jetblack/iphone7-jetblack-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430076339")
                                 .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/jetblack/iphone7-jetblack-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430076339")),
                         ])
                         .buttons([
-                            builder.CardAction.imBack(session, "select:100", "Select")
+                            builder.CardAction.imBack(session, "select:100", "Select Red Value Bundle with iPhone 7");
+                            builder.CardAction.imBack(session, "neither:neither", "Neither of these")
                         ]),
                     new builder.HeroCard(session)
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
-                        .subtitle("The new iPhone 7 Plus starting from £58 monthly with an upfront cost of £220")
+                        .subtitle("The new iPhone 7 Plus starting from £58 monthly with an upfront cost of £220. Includes Spotify subscription for 12 months.")
                         .images([
                             builder.CardImage.create(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/plus/iphone7-plus-silver-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430122140")
                                 .tap(builder.CardAction.showImage(session, "http://store.storeimages.cdn-apple.com/4662/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/plus/iphone7-plus-silver-select-2016?wid=1200&hei=630&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1472430122140")),
                         ])
                         .buttons([
-                            builder.CardAction.imBack(session, "select:101", "Select")
+                            builder.CardAction.imBack(session, "select:101", "Select Red Value Bundle with iPhone 7 Plus")
+                            builder.CardAction.imBack(session, "neither:neither", "Neither of these")
                         ])
                 ]);
             builder.Prompts.choice(session, msg, "select:100|select:101|back|neither");
