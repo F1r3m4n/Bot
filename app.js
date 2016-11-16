@@ -264,8 +264,8 @@ intent2.matches('GiveRecommendation', [
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
                         .subtitle("The new iPhone 7 starting from £53 monthly with an upfront cost of £130")
                         .images([
-                            builder.CardImage.create(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_jet_bla.jpg")
-                                .tap(builder.CardAction.showImage(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_jet_bla.jpg")),
+                            builder.CardImage.create(session, "https://staticshop.o2.co.uk/product/images/iphone-7-matt-black_sku-header.png?cb=1e574806d7bfb2bd10c5c208a59bf3c3")
+                                .tap(builder.CardAction.showImage(session, "https://staticshop.o2.co.uk/product/images/iphone-7-matt-black_sku-header.png?cb=1e574806d7bfb2bd10c5c208a59bf3c3")),
                         ])
                         .buttons([
                             builder.CardAction.imBack(session, "select:100", "Select")
@@ -274,14 +274,14 @@ intent2.matches('GiveRecommendation', [
                         .title("iPhone 7 with a 10 GB Red Value Bundle")
                         .subtitle("The new iPhone 7 Plus starting from £58 monthly with an upfront cost of £220")
                         .images([
-                            builder.CardImage.create(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_plus_si.jpg")
-                                .tap(builder.CardAction.showImage(session, "http://www.vodafone.co.uk/cs/groups/public/documents/webcontent/450x370_apple_iphone_7_plus_si.jpg")),
+                            builder.CardImage.create(session, "https://staticshop.o2.co.uk/product/images/iphone-7-plus-gold_sku-header.png?cb=c96204056f53574d587b41c76d63a034")
+                                .tap(builder.CardAction.showImage(session, "https://staticshop.o2.co.uk/product/images/iphone-7-plus-gold_sku-header.png?cb=c96204056f53574d587b41c76d63a034")),
                         ])
                         .buttons([
                             builder.CardAction.imBack(session, "select:101", "Select")
                         ])
                 ]);
-            builder.Prompts.choice(session, msg, "select:100|select:101");
+            builder.Prompts.choice(session, msg, "select:100|select:101|back:back|neither:neither");
 
             //builder.Prompts.confirm(session,"Does this interest you?");
 
@@ -293,6 +293,12 @@ intent2.matches('GiveRecommendation', [
                 case 'select':
                     action = 'selected';
                     break;
+                case 'back':
+                    action = 'back';
+                    break;
+                case 'neither':
+                    action = 'neither';
+                    break;
             }
             switch (kvPair[1]) {
                 case '100':
@@ -302,12 +308,24 @@ intent2.matches('GiveRecommendation', [
                     item = "the iPhone 7 Plus with Red Value Bundle";
                     break;
             }
-            session.endDialog('You %s "%s"', action, item);
-            session.send("I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
-            session.userData.data = 10;
-            session.userData.switched = 1;
-            session.endDialog();
+            if (action == 'selected'){
+                session.send('You %s "%s"', action, item);
+                session.send("I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+                session.userData.data = 10;
+                session.userData.switched = 1;
+                session.endDialog();
+            }
+            else if (action == 'neither'){
+                builder.Prompts.text(session,"Could you specify the data allowance that would better suit you ?");
+            }
+            else{
+                session.endDialog();
+            }
+        },
+        function(session){
+            session.replaceDialog('/tariff_eoc');
         }
+
  ]);
 
 //    },
