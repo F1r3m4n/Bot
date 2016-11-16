@@ -281,7 +281,7 @@ intent2.matches('GiveRecommendation', [
                             builder.CardAction.imBack(session, "select:101", "Select")
                         ])
                 ]);
-            builder.Prompts.choice(session, msg, "select:100|select:101|back:back|neither:neither");
+            builder.Prompts.choice(session, msg, "select:100|select:101|back|neither");
 
             //builder.Prompts.confirm(session,"Does this interest you?");
 
