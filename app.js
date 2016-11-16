@@ -71,7 +71,7 @@ bot.dialog('/profile_name', [
             builder.Prompts.text(session, "Hi there, before I can look at your contract details I need to get your personal details. Can you please give me your first name as it's registered with VF?")
         }
          else {
-            builder.Prompts.text(session, "Hi, I am Winston, VF's trial Chatbot. Before we continue, could you please give me your first name as it's registered with VF?");
+            builder.Prompts.text(session, "Hi, I am Glafkos, VF's trial Chatbot. Before we continue, could you please give me your first name as it's registered with VF?");
         }
     },
     function (session, results, next) {
@@ -249,32 +249,96 @@ intent2.matches('MoreData', [
 
 intent2.matches('GiveRecommendation', [
     function (session, args, next) {
-            session.send('Ok! Based on your recent usage I can recommend that you move to a bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle.')
-            session.send('This bundle comes with the new iPhone 7 starting from £45 monthly with an upfront cost of £50');
+            session.send('Ok! Based on your recent usage I can recommend that you move to the Red Value Bundle with 10 GB. This will allow you stream content freely without worrying about going out of bundle.')
+            session.send('This bundle comes with the new iPhone 7 starting from £53 monthly with an upfront cost of £130');
+            //var msg = new builder.Message(session)
+            //            .attachments([{
+            //                contentType: "image/jpeg",
+            //                contentUrl: "http://store.storeimages.cdn-apple.com/4973/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/gallery6/iphone7-gallery6-2016?wid=1670&hei=1282&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1473278890397"
+            //            }]);
+            //session.send(msg);
+
             var msg = new builder.Message(session)
-                        .attachments([{
-                            contentType: "image/jpeg",
-                            contentUrl: "http://store.storeimages.cdn-apple.com/4973/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone7/gallery6/iphone7-gallery6-2016?wid=1670&hei=1282&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1473278890397"
-                        }]);
-            session.send(msg);
-            builder.Prompts.confirm(session,"Does this interest you?");
+                .attachmentLayout(builder.AttachmentLayout.carousel)
+                .attachments([
+                    new builder.HeroCard(session)
+                        .title("Space Needle")
+                        .subtitle("The Space Needle is an observation tower in Seattle, Washington, a landmark of the Pacific Northwest, and an icon of Seattle.")
+                        .images([
+                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
+                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/800px-Seattlenighttimequeenanne.jpg")),
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Space_Needle", "Wikipedia"),
+                            builder.CardAction.imBack(session, "select:100", "Select")
+                        ]),
+                    new builder.HeroCard(session)
+                        .title("Pikes Place Market")
+                        .subtitle("Pike Place Market is a public market overlooking the Elliott Bay waterfront in Seattle, Washington, United States.")
+                        .images([
+                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/320px-PikePlaceMarket.jpg")
+                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/800px-PikePlaceMarket.jpg")),
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Pike_Place_Market", "Wikipedia"),
+                            builder.CardAction.imBack(session, "select:101", "Select")
+                        ]),
+                    new builder.HeroCard(session)
+                        .title("EMP Museum")
+                        .subtitle("EMP Musem is a leading-edge nonprofit museum, dedicated to the ideas and risk-taking that fuel contemporary popular culture.")
+                        .images([
+                            builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
+                                .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/EMP_Museum", "Wikipedia"),
+                            builder.CardAction.imBack(session, "select:102", "Select")
+                        ])
+                ]);
+            builder.Prompts.choice(session, msg, "select:100|select:101|select:102");
+
+            //builder.Prompts.confirm(session,"Does this interest you?");
 
     },
-    function (session, results, next) {
-        if (results.response){
-           session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
-           session.userData.data = 10;
-           session.userData.switched = 1;
-           session.endDialog();
+        function (session, results) {
+            var action, item;
+            var kvPair = results.response.entity.split(':');
+            switch (kvPair[0]) {
+                case 'select':
+                    action = 'selected';
+                    break;
+            }
+            switch (kvPair[1]) {
+                case '100':
+                    item = "the Space Needle";
+                    break;
+                case '101':
+                    item = "Pikes Place Market";
+                    break;
+                case '102':
+                    item = "the EMP Museum";
+                    break;
+            }
+            session.endDialog('You %s "%s"', action, item);
         }
-        else{
-           builder.Prompts.text(session,"Could you specify the data allowance that would better suit you ?");
-        }
-    },
-    function(session){
-            session.replaceDialog('/tariff_eoc');
-    }
-]);
+ ]);
+
+//    },
+//    function (session, results, next) {
+//        if (results.response){
+//           session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+//           session.userData.data = 10;
+//           session.userData.switched = 1;
+//           session.endDialog();
+//        }
+//        else{
+//           builder.Prompts.text(session,"Could you specify the data allowance that would better suit you ?");
+//        }
+//    },
+//    function(session){
+//            session.replaceDialog('/tariff_eoc');
+//    }
+//]);
 
 
 
