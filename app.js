@@ -370,13 +370,13 @@ intent4.matches('GiveRecommendation', [
 ]);
 
 
-//intent3.matches('SpecifyData', [
-//    function (session, args, next) {
-//	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
-//	    session.userData.data = data.entity
-//        session.endDialog();
-//    }
-//]);
+intent3.matches('SpecifyData', [
+    function (session, args, next) {
+	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
+	    session.userData.data = data.entity
+        session.endDialog();
+    }
+]);
 
 
 intent4.matches('SpecifyData', [
