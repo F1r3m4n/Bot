@@ -379,7 +379,7 @@ intent4.matches('GiveRecommendation', [
 //]);
 
 
-intent3.matches('SpecifyData', [
+intent4.matches('SpecifyData', [
     function (session, args, next) {
 	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
 	    session.userData.data = data.entity
