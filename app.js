@@ -422,25 +422,6 @@ intent2.matches('SpecifyData', [
 ]);
 
 
-intent4.matches('SpecifyData', [
-    function (session, args, next) {
-	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
-	    session.userData.data = data.entity
-	    builder.Prompts.confirm(session,"The Red XXL bundle has " +  session.userData.data + " GB, unlimited minutes and texts. That would be an extra £5 monthly. Does this interest you?")
-    },
-    function (session, results, next) {
-            if (results.response){
-               session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
-               session.endDialog();
-            }
-            else{
-               builder.Prompts.text(session,"Could you specify the data allowance that would better suit you ?");
-            }
-        },
-    function(session){
-            session.replaceDialog('/tariff_inlife');
-    }
-]);
 
 
 intent.matches('Profanity', [
