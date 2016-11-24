@@ -71,7 +71,7 @@ bot.dialog('/profile_name', [
             builder.Prompts.text(session, "Hi there, before I can look at your contract details I need to get your personal details. Can you please give me your first name as it's registered with VF?")
         }
          else {
-            builder.Prompts.text(session, "Hi, I am Glafkos, VF's trial Chatbot. Before we continue, could you please give me your first name as it's registered with VF?");
+            builder.Prompts.text(session, "Hi, I am Winston, VF's trial Chatbot. Before we continue, could you please give me your first name as it's registered with VF?");
         }
     },
     function (session, results, next) {
@@ -375,6 +375,27 @@ intent3.matches('SpecifyData', [
 	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
 	    session.userData.data = data.entity
         session.endDialog();
+    }
+]);
+
+
+intent3.matches('SpecifyData', [
+    function (session, args, next) {
+	    var data = builder.EntityRecognizer.findEntity(args.entities,'builtin.number');
+	    session.userData.data = data.entity
+	    builder.Prompts.confirm(session,"The Red Red Value Bundle has " +  session.userData.data + " GB, unlimited minutes and texts. That would be an extra £10 monthly. Does this interest you?")
+    },
+    function (session, results, next) {
+            if (results.response){
+               session.send("Great, I'll go ahead and make the switch for you. If you don't need anything else say bye to end the conversation");
+               session.endDialog();
+            }
+            else{
+               builder.Prompts.text(session,"Could you specify the data allowance that would better suit you ?");
+            }
+        },
+    function(session){
+            session.replaceDialog('/tariff_inlife');
     }
 ]);
 
